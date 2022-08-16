@@ -64,24 +64,26 @@ Create file:
 /pages/product/[id].js
 ```
 
+For fast React component creation use `rafce` shortcode in VSCode
+
 ```js
-import React from 'react';
-import { useRouter } from 'next/router';
+import React from 'react'
+import { useRouter } from 'next/router'
 
 const ProductItem = () => {
-  const router = useRouter();
+  const router = useRouter()
 
-  return <div>ProductItem: {router.query.id}</div>;
-};
+  return <div>ProductItem: {router.query.id}</div>
+}
 
-export default ProductItem;
+export default ProductItem
 ```
 
 ## Link
 
 ```js
-import React from 'react';
-import Link from 'next/link';
+import React from 'react'
+import Link from 'next/link'
 
 export const Navbar = () => {
   return (
@@ -99,13 +101,13 @@ export const Navbar = () => {
         </li>
       </ul>
     </nav>
-  );
-};
+  )
+}
 ```
 
 ```js
-import React from 'react';
-import { Navbar } from '../components/Navbar/Navbar';
+import React from 'react'
+import { Navbar } from '../components/Navbar/Navbar'
 
 const Home = () => {
   return (
@@ -113,14 +115,18 @@ const Home = () => {
       <Navbar />
       <p>Home</p>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
 ```
 
-## Install TypeScript
+## Install Dependencies
 
 ```
-npm install --save-dev typescript @types/react @types/node
+npm i typescript @types/react @types/node husky prettier pretty-quick -D
+```
+
+```
+npm i @types/cors cors semantic-ui-css semantic-ui-react isomorphic-unfetch
 ```
