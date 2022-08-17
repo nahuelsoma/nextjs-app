@@ -1,4 +1,5 @@
 type Url = string
+
 type Json =
   | string
   | number

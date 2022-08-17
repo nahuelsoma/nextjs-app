@@ -1,51 +1,43 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Link from "next/link";
+
+import Layout from '@components/Layout/Layout'
+import ProductSummary from '@components/ProductSummary/ProductSummary'
 
 const ProductPage = () => {
-  // state
-  const [product, setProduct] = useState<TProduct>()
-  // router
-  const {
-    query: { id },
-  } = useRouter()
+  const { query } = useRouter()
+  const [product, setProduct] = useState<TProduct | null>(null)
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
-    if (id) {
+    if (query.id) {
       window
-        .fetch(`/api/avo/${id}`)
-        .then((res) => res.json())
-        .then((data) => setProduct(data))
+        .fetch(`/api/avo/${query.id}`)
+        .then((response) => response.json())
+        .then((data: TProduct) => {
+          setProduct(data)
+          setLoading(false)
+        });
+    } else {
+      setProduct(null);
+      setLoading(false)
     }
-  }, [id])
+  }, [query.id])
 
   return (
-    <section>
-      <div className="container">
-        <img src={product?.image} alt={product?.name} />
-        <p>Name: {product?.name}</p>
-        <p>Price: {product?.price}</p>
-        <p>Sku: {product?.sku}</p>
-        <p>Description: {product?.attributes.description}</p>
+    <Layout>
+      {product == null ? null : <ProductSummary product={product} />}
+      {loading == false && product == null ? <div className="not-found">
+        <h2>We do not have this avocado</h2>
+        <Link href="/"><a>Return to the main page</a></Link>
         <style jsx>{`
-                .container {
-                  margin: 30px 0;
-                  border: 1px solid lightgray;
-                  border-radius: 1rem;
-                  padding: 1rem;
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  align-content: center;
-                  text-align: center;
-                }
-                img {
-                  height: 250px;
-                  width: 250px;
-                  margin: 0 auto;
-                }
-            `}</style>
-      </div>
-    </section>
+          .not-found {
+            text-align: center;
+          }
+        `}</style>
+      </div> : null}
+    </Layout>
   )
 }
 
