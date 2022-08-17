@@ -38,7 +38,7 @@ const AboutPage = () => {
           5 Surprising Facts About Avocados
         </Header>
         <figure>
-          <Image src="/images/avocados.jpg" alt="Avocados on a table" />
+          <Image src="/images/avocados.jpg" alt="Avocados on a table" loading="lazy" />
           <figcaption>
             Originally from{' '}
             <a

@@ -1,3 +1,7 @@
+Project:
+
+👉 https://nextjs-app-ten-sigma.vercel.app
+
 ## Installing NextJS
 
 ### Manually
